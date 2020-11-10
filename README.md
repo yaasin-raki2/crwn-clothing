@@ -1,3 +1,3 @@
 Large scale Ecommerce Web-app
 
-https://crwn-clothz.herokuapp.com/
+live preview : https://crwn-clothz.herokuapp.com/
