@@ -12,10 +12,13 @@ import {
 import { SignInContainer, Title, ButtonsBarContainer } from './sign-in.styles';
 
 class SignIn extends React.Component {
-  state = {
-    email: '',
-    password: '',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+    }
+  }
 
   handleSubmit = async event => {
     event.preventDefault();
