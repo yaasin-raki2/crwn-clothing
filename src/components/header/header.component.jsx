@@ -1,11 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import CurrentUserContext from '../../contexts/current-user/current-user.context';
-
-import { connect } from 'react-redux';
-
-import { createStructuredSelector } from 'reselect';
-import { selectCartHidden } from '../../redux/cart/cart.selectors';
+import CartContext from '../../contexts/cart/cart.context';
 
 import { auth } from '../../firebase/firebase.utils';
 import './header.styles.scss';
@@ -14,8 +10,10 @@ import { ReactComponent as Logo } from '../../assets/4.4 crown.svg.svg';
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
-const Header = ({ hidden }) => {
+const Header = () => {
   const currentUser = useContext(CurrentUserContext);
+  const [hidden, setHidden] = useState(true);
+  const toggleHidden = () => setHidden(!hidden);
   return (
     <div className='header'>
       <Link className='logo-container' to='/'>
@@ -37,15 +35,14 @@ const Header = ({ hidden }) => {
             SIGN IN
           </Link>
         )}
-        <CartIcon />
+        <CartContext.Provider value={{ hidden, toggleHidden }}>
+          <CartIcon />
+        </CartContext.Provider>
       </div>
       {hidden ? null : <CartDropdown />}
     </div>
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  hidden: selectCartHidden,
-});
 
-export default connect(mapStateToProps)(Header);
+export default Header;
