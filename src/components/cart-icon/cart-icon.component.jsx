@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import CartContext from '../../contexts/cart/cart.context';
+import { CartContext } from '../../providers/cart/cart.provider';
 
 import { selectCartItemsCount } from '../../redux/cart/cart.selectors';
 
@@ -19,7 +19,6 @@ const CartIcon = ({ itemCount }) => {
     </div>
   );
 };
-
 
 const mapStateToProps = createStructuredSelector({
   itemCount: selectCartItemsCount,
